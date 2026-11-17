@@ -1,0 +1,17 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.theluckystrike/flood-zone-lookup-fema-flood-map-mcp",
+  "title": "Flood Zone Lookup (FEMA Flood Map) MCP",
+  "description": "FEMA flood zone for any US address: zone, base flood elevation, FIRM panel, insurance meaning.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/theluckystrike/flood-zone-lookup-fema-flood-map-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://flood-zone-lookup-fema-flood-map-mcp.lipmichal.workers.dev/mcp"
+    }
+  ]
+}
