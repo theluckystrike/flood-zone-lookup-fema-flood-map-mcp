@@ -1,5 +1,49 @@
 # flood-zone-lookup-fema-flood-map-mcp
 
+**FEMA flood zone, base flood elevation and Special Flood Hazard Area status for any US address, from the FEMA flood map (NFHL), as an MCP server.** Free and hosted: no API key, no sign-up.
+
+Hosted MCP URL (Streamable HTTP):
+
+```
+https://flood-zone-lookup-fema-flood-map-mcp.lipmichal.workers.dev/mcp
+```
+
+## Quick start
+
+### Claude
+
+Claude Desktop or claude.ai: Settings > Connectors > Add custom connector, then paste the URL above.
+
+Claude Code:
+
+```
+claude mcp add --transport http flood-zone https://flood-zone-lookup-fema-flood-map-mcp.lipmichal.workers.dev/mcp
+```
+
+Claude Desktop config file (`claude_desktop_config.json`), through the `mcp-remote` bridge:
+
+```json
+{
+  "mcpServers": {
+    "flood-zone": { "command": "npx", "args": ["-y", "mcp-remote", "https://flood-zone-lookup-fema-flood-map-mcp.lipmichal.workers.dev/mcp"] }
+  }
+}
+```
+
+### Cursor
+
+Add to `~/.cursor/mcp.json`.
+
+```json
+{
+  "mcpServers": {
+    "flood-zone": { "url": "https://flood-zone-lookup-fema-flood-map-mcp.lipmichal.workers.dev/mcp" }
+  }
+}
+```
+
+## About
+
 FEMA flood zone lookup for AI assistants. Ask what flood zone an address is in, whether a house is in the 100-year floodplain, what the base flood elevation is, whether flood insurance is required, or how far the nearest high-risk zone is.
 
 This is a Model Context Protocol (MCP) server. It reads the FEMA National Flood Hazard Layer (the digital FEMA flood map) and geocodes addresses with the U.S. Census Bureau geocoder at call time. It needs no API key.
@@ -20,7 +64,7 @@ Every result has structured JSON, a plain-text summary, `as_of`, `source` and `m
 - The base flood elevation and its datum (NAVD88 or NGVD29), or the flood depth in AO zones, and the FIRM panel that applies. Where panels of neighbouring counties overlap, it picks the panel of the flood study that covers the point.
 - How close the floodplain is: the straight-line distance to the nearest high-risk, floodway and 0.2% annual chance zones.
 
-## Install
+## Other clients and local install
 
 ### Hosted (custom connector, ChatGPT developer mode, any remote MCP client)
 
@@ -28,18 +72,6 @@ Paste this URL. No token, no sign-up.
 
 ```
 https://flood-zone-lookup-fema-flood-map-mcp.lipmichal.workers.dev/mcp
-```
-
-### Cursor
-
-Add to `~/.cursor/mcp.json`.
-
-```json
-{
-  "mcpServers": {
-    "flood-zone": { "url": "https://flood-zone-lookup-fema-flood-map-mcp.lipmichal.workers.dev/mcp" }
-  }
-}
 ```
 
 ### VS Code
